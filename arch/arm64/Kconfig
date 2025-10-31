@@ -63,7 +63,6 @@ config ARM64
 	select GENERIC_TIME_VSYSCALL
 	select HANDLE_DOMAIN_IRQ
 	select HARDIRQS_SW_RESEND
-	select HAVE_ACPI_APEI if (ACPI && EFI)
 	select HAVE_ALIGNED_STRUCT_PAGE if SLUB
 	select HAVE_ARCH_AUDITSYSCALL
 	select HAVE_ARCH_BITREVERSE
@@ -123,6 +122,20 @@ config ARM64
 	select SPARSE_IRQ
 	select SYSCTL_EXCEPTION_TRACE
 	select THREAD_INFO_IN_TASK
+	select ANDROID_BINDERFS if USER_NS && SECURITYFS
+	select FS_VERITY if BLOCK && CRYPTO && CRYPTO_SHA256
+	select FS_VERITY_BUILTIN_SIGNATURES if FS_VERITY
+	select NETFILTER_XT_MATCH_QUOTA2 if NETFILTER_XTABLES && NET
+	select NETFILTER_XT_MATCH_QUOTA2_LOG if NETFILTER_XT_MATCH_QUOTA2
+	select PSI if CGROUPS && MEMCG
+	select TRACE_GPU_MEM if TRACEPOINTS
+	select UID_SYS_STATS if PROC_FS && UID16
+	select USB_CONFIGFS_F_ACC if USB_CONFIGFS
+	select USB_CONFIGFS_F_AUDIO_SRC if USB_CONFIGFS
+	select USB_CONFIGFS_UEVENT if USB_CONFIGFS
+	select XFRM_INTERFACE if XFRM && INET
+	select SONY_FF if INPUT && HID_SONY
+	select XFRM_MIGRATE if XFRM
 	help
 	  ARM 64-bit (AArch64) Linux support.
 
@@ -134,7 +147,6 @@ config ARCH_PHYS_ADDR_T_64BIT
 
 config MMU
 	def_bool y
-
 config ARM64_PAGE_SHIFT
 	int
 	default 16 if ARM64_64K_PAGES
@@ -257,9 +269,8 @@ config ARCH_PROC_KCORE_TEXT
 
 source "init/Kconfig"
 
-source "kernel/Kconfig.freezer"
 
-source "arch/arm64/Kconfig.platforms"
+# source "arch/arm64/Kconfig.platforms"
 
 menu "Bus support"
 
@@ -279,7 +290,7 @@ config PCI_DOMAINS_GENERIC
 config PCI_SYSCALL
 	def_bool PCI
 
-source "drivers/pci/Kconfig"
+# source "drivers/pci/Kconfig"
 
 endmenu
 
@@ -845,7 +856,7 @@ config FORCE_MAX_ZONEORDER
 
 	  We make sure that we can allocate upto a HugePage size for each configuration.
 	  Hence we have :
-		MAX_ORDER = (PMD_SHIFT - PAGE_SHIFT) + 1 => PAGE_SHIFT - 2
+	  	MAX_ORDER = (PMD_SHIFT - PAGE_SHIFT) + 1 => PAGE_SHIFT - 2
 
 	  However for 4K, we choose a higher default value, 11 as opposed to 10, giving us
 	  4M allocations matching the default size used by generic code.
@@ -931,7 +942,7 @@ config SWP_EMULATION
 	  implement a global monitor, this option can cause programs that
 	  perform SWP operations to uncached memory to deadlock.
 
-	  If unsure, say Y
+	  If unsure, say Y.
 
 config CP15_BARRIER_EMULATION
 	bool "Emulate CP15 Barrier instructions"
@@ -946,7 +957,7 @@ config CP15_BARRIER_EMULATION
 	  enabled, CP15 barrier usage is traced which can help
 	  identify software that needs updating.
 
-	  If unsure, say Y
+	  If unsure, say Y.
 
 config SETEND_EMULATION
 	bool "Emulate SETEND instruction"
@@ -983,7 +994,7 @@ config ARM64_HW_AFDBM
 	  hardware updates of the access and dirty information in page
 	  table entries. When enabled in TCR_EL1 (HA and HD bits) on
 	  capable processors, accesses to pages with PTE_AF cleared will
-	  set this bit instead of raising an access flag fault.
+	  set this bit instead of raising an access flag fault. 
 	  Similarly, writes to read-only pages with the DBM bit set will
 	  clear the read-only bit (AP[2]) instead of raising a
 	  permission fault.
@@ -1072,11 +1083,6 @@ endmenu
 
 config ARM64_MODULE_CMODEL_LARGE
 	bool
-
-config ARM64_MODULE_PLTS
-	bool
-	select ARM64_MODULE_CMODEL_LARGE
-	select HAVE_MOD_ARCH_SPECIFIC
 
 config RELOCATABLE
 	bool
@@ -1168,7 +1174,7 @@ config EFI
 	help
 	  This option provides support for runtime services provided
 	  by UEFI firmware (such as non-volatile variables, realtime
-          clock, and platform reset). A UEFI stub is also provided to
+	  clock, and platform reset). A UEFI stub is also provided to
 	  allow the kernel to be booted as an EFI application. This
 	  is only useful on systems that have UEFI firmware.
 
