@@ -54,7 +54,15 @@ config ANDROID_BINDER_IPC_SELFTEST
 	  Binder selftest checks the allocation and free of binder buffers
 	  exhaustively with combinations of various buffer sizes and
 	  alignments.
-
+	  
+config ANDROID_BINDERFS
+	bool "Android Binderfs filesystem"
+	depends on ANDROID && USER_NS && SECURITYFS
+	default y if ANDROID
+	help
+	  Enable binderfs, a filesystem for the Android Binder IPC mechanism.
+	  Binderfs allows multiple binder instances to securely coexist.
+	  
 endif # if ANDROID
 
 endmenu

@@ -23,6 +23,10 @@
 #include <linux/seq_file.h>
 #include <linux/mutex.h>
 
+extern atomic_t system_freezing_cnt;
+extern bool freeze_task(struct task_struct *p);
+
+
 /*
  * A cgroup is freezing if any FREEZING flags are set.  FREEZING_SELF is
  * set if "FROZEN" is written to freezer.state cgroupfs file, and cleared

@@ -303,6 +303,22 @@ source "fs/coda/Kconfig"
 source "fs/afs/Kconfig"
 source "fs/9p/Kconfig"
 
+config FS_VERITY
+	bool "FS Verity"
+	default y
+	depends on BLOCK && CRYPTO && CRYPTO_SHA256
+	help
+	  Enable support for fs-verity, which provides transparent integrity
+	  and authenticity protection for readonly files.
+
+config FS_VERITY_BUILTIN_SIGNATURES
+	bool "Enable support for builtin verity signatures"
+	default y
+	depends on FS_VERITY
+	help
+	  Enable support for fs-verity files to have their signatures
+	  checked against keys compiled into the kernel.
+	  
 endif # NETWORK_FILESYSTEMS
 
 source "fs/nls/Kconfig"

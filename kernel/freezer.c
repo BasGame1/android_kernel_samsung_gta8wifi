@@ -15,6 +15,18 @@
 atomic_t system_freezing_cnt = ATOMIC_INIT(0);
 EXPORT_SYMBOL(system_freezing_cnt);
 
+bool frozen(struct task_struct *p)
+{
+	return p->flags & PF_FROZEN;
+}
+
+bool freezing(struct task_struct *p)
+{
+	if (likely(!atomic_read(&system_freezing_cnt)))
+		return false;
+	return freezing_slow_path(p);
+}
+
 /* indicate whether PM freezing is in effect, protected by pm_mutex */
 bool pm_freezing;
 bool pm_nosig_freezing;

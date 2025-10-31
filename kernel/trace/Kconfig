@@ -3,6 +3,13 @@
 #  select HAVE_FUNCTION_TRACER:
 #
 
+config TRACE_GPU_MEM
+	bool "GPU memory usage tracepoints"
+	default y
+	depends on TRACEPOINTS
+	help
+	  Enable tracepoints for GPU memory total usage.
+	  
 config USER_STACKTRACE_SUPPORT
 	bool
 

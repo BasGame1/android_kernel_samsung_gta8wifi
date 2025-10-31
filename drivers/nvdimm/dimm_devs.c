@@ -13,6 +13,7 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 #include <linux/vmalloc.h>
 #include <linux/device.h>
+#undef ND_MIN_NAMESPACE_SIZE
 #include <linux/ndctl.h>
 #include <linux/slab.h>
 #include <linux/io.h>

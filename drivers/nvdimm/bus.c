@@ -19,6 +19,7 @@
 #include <linux/fcntl.h>
 #include <linux/async.h>
 #include <linux/genhd.h>
+#undef ND_MIN_NAMESPACE_SIZE
 #include <linux/ndctl.h>
 #include <linux/sched.h>
 #include <linux/slab.h>

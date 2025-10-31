@@ -219,6 +219,7 @@ config USB_F_TCM
 
 config USB_CONFIGFS
 	tristate "USB Gadget functions configurable through configfs"
+	default y
 	select USB_LIBCOMPOSITE
 	help
 	  A Linux USB "gadget" can be set up through configfs.
@@ -229,6 +230,27 @@ config USB_CONFIGFS
 	  appropriate symbolic links.
 	  For more information see Documentation/usb/gadget_configfs.txt.
 
+config USB_CONFIGFS_F_ACC
+	tristate "Accessory"
+	default y
+	depends on USB_CONFIGFS
+	help
+	  Android Accessory function.
+
+config USB_CONFIGFS_F_AUDIO_SRC
+	tristate "Audio Source"
+	default y
+	depends on USB_CONFIGFS
+	help
+	  Audio Source function.
+
+config USB_CONFIGFS_UEVENT
+	bool "Enable UEVENT notifications"
+	default y
+	depends on USB_CONFIGFS
+	help
+	  Enable sending UEVENTs on gadget state changes.
+	  
 config USB_CONFIGFS_SERIAL
 	bool "Generic serial bulk in/out"
 	depends on USB_CONFIGFS

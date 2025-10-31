@@ -1,6 +1,14 @@
 #
 # XFRM configuration
 #
+config XFRM_INTERFACE
+	tristate "XFRM (IPSec) virtual network interface"
+	default y
+	depends on XFRM && INET
+	help
+	  This option enables a virtual network interface (xfrmi) that
+	  can be used to route and capture IPSec-processed packets.
+	  
 config XFRM
        bool
        depends on NET

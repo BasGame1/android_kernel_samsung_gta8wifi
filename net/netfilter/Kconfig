@@ -1535,7 +1535,21 @@ config NETFILTER_XT_MATCH_U32
 	  lengths.
 
 	  Details and examples are in the kernel module source.
+config NETFILTER_XT_MATCH_QUOTA2
+	tristate "quota2 match support"
+	default y
+	depends on NETFILTER_XTABLES && NET
+	help
+	  This option adds a "quota2" match. This match can be used to
+	  implement network quotas.
 
+config NETFILTER_XT_MATCH_QUOTA2_LOG
+	bool "quota2 log support"
+	default y
+	depends on NETFILTER_XT_MATCH_QUOTA2
+	help
+	  This option adds logging support to the quota2 match.
+	  
 endif # NETFILTER_XTABLES
 
 endmenu

@@ -917,7 +917,7 @@ config IPC_NS
 
 config USER_NS
 	bool "User namespace"
-	default n
+	default y
 	help
 	  This allows containers, i.e. vservers, to use user namespaces
 	  to provide different user info for different servers.
@@ -1925,4 +1925,12 @@ config ASN1
 	  inform it as to what tags are to be expected in a stream and what
 	  functions to call on what tags.
 
+config PSI
+	bool "Pressure Stall Information"
+	depends on CGROUPS && MEMCG
+	default y
+	help
+	  Collects metrics on CPU, memory, and I/O pressure.
+	  Required by modern Android userspace for performance.
+	  
 source "kernel/Kconfig.locks"

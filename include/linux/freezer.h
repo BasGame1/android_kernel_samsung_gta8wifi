@@ -22,22 +22,14 @@ extern unsigned int freeze_timeout_msecs;
 /*
  * Check if a process has been frozen
  */
-static inline bool frozen(struct task_struct *p)
-{
-	return p->flags & PF_FROZEN;
-}
+extern bool frozen(struct task_struct *p);
 
 extern bool freezing_slow_path(struct task_struct *p);
 
 /*
  * Check if there is a request to freeze a process
  */
-static inline bool freezing(struct task_struct *p)
-{
-	if (likely(!atomic_read(&system_freezing_cnt)))
-		return false;
-	return freezing_slow_path(p);
-}
+extern bool freezing(struct task_struct *p);
 
 /* Takes and releases task alloc lock using task_lock() */
 extern void __thaw_task(struct task_struct *t);

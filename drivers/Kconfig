@@ -1,6 +1,14 @@
 # SPDX-License-Identifier: GPL-2.0
 menu "Device Drivers"
 
+config UID_SYS_STATS
+	bool "UID-based system statistics"
+	default y
+	depends on PROC_FS && UID16
+	help
+	  Enable UID-based statistics for network activity and CPU time,
+	  exposed through procfs. Required by Android.
+	  
 source "drivers/amba/Kconfig"
 
 source "drivers/base/Kconfig"

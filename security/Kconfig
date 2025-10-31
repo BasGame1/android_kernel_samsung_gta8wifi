@@ -38,6 +38,7 @@ config SECURITY_WRITABLE_HOOKS
 
 config SECURITYFS
 	bool "Enable the securityfs filesystem"
+	default y
 	help
 	  This will build the securityfs filesystem.  It is currently used by
 	  the TPM bios character driver and IMA, an integrity provider.  It is

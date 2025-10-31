@@ -17,6 +17,7 @@
 #include <linux/hash.h>
 #include <linux/sort.h>
 #include <linux/io.h>
+#undef ND_MIN_NAMESPACE_SIZE
 #include <linux/nd.h>
 #include "nd-core.h"
 #include "nd.h"
