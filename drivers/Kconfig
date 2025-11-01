@@ -4,7 +4,7 @@ menu "Device Drivers"
 config UID_SYS_STATS
 	bool "UID-based system statistics"
 	default y
-	depends on PROC_FS && UID16
+	depends on PROC_FS
 	help
 	  Enable UID-based statistics for network activity and CPU time,
 	  exposed through procfs. Required by Android.
