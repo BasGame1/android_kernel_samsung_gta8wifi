@@ -30,7 +30,7 @@ LDFLAGS_vmlinux	+= --fix-cortex-a53-843419
   endif
 endif
 
-KBUILD_DEFCONFIG := gta8wifi_vintf_fixed_defconfig
+KBUILD_DEFCONFIG := gta8wifi_eur_open_defconfig
 
 # Check for binutils support for specific extensions
 lseinstr := $(call as-instr,.arch_extension lse,-DCONFIG_AS_LSE=1)
