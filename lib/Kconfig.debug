@@ -1,5 +1,12 @@
 menu "printk and dmesg options"
 
+config SCHED_DEBUG
+	bool "Scheduler debugging"
+	depends on DEBUG_KERNEL
+	default y if DEBUG_KERNEL
+	help
+	  Enable scheduler-specific debugging messages.
+	  
 config PRINTK_TIME
 	bool "Show timing information on printks"
 	depends on PRINTK

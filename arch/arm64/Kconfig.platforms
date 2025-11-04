@@ -1,5 +1,5 @@
 menu "Platform selection"
-
+      
 config ARCH_ACTIONS
 	bool "Actions Semi Platforms"
 	select OWL_TIMER

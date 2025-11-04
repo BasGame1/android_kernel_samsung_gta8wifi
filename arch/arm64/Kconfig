@@ -1,7 +1,6 @@
 config ARM64
 	def_bool y
 	select ACPI_CCA_REQUIRED if ACPI
-	select COMPAT
 	select ACPI_GENERIC_GSI if ACPI
 	select ACPI_GTDT if ACPI
 	select ACPI_IORT if ACPI
@@ -137,9 +136,40 @@ config ARM64
 	select XFRM_INTERFACE if XFRM && INET
 	select SONY_FF if INPUT && HID_SONY
 	select XFRM_MIGRATE if XFRM
+	select COMPAT
+	select ANDROID_BINDERFS if USER_NS && SECURITYFS
+	select FS_VERITY if BLOCK && CRYPTO && CRYPTO_SHA256
+	select FS_VERITY_BUILTIN_SIGNATURES if FS_VERITY
+	select NETFILTER_XT_MATCH_QUOTA2 if NETFILTER_XTABLES && NET
+	select NETFILTER_XT_MATCH_QUOTA2_LOG if NETFILTER_XT_MATCH_QUOTA2
+	select PSI if CGROUPS && MEMCG
+	select TRACE_GPU_MEM if TRACEPOINTS
+	select UID_SYS_STATS if PROC_FS && UID16
+	select USB_CONFIGFS_F_ACC if USB_CONFIGFS
+	select USB_CONFIGFS_F_AUDIO_SRC if USB_CONFIGFS
+	select USB_CONFIGFS_UEVENT if USB_CONFIGFS
+	select XFRM_INTERFACE if XFRM && INET
+	select SONY_FF if INPUT && HID_SONY
+	select XFRM_MIGRATE if XFRM
+	select ARMV8_DEPRECATED
+	select ARM64_SW_TTBR0_PAN
+	select CP15_BARRIER_EMULATION
+	select SETEND_EMULATION
+	select SWP_EMULATION
+	select BPF_JIT_ALWAYS_ON
+	select HAVE_MOVE_PMD
+	select HAVE_MOVE_PUD
 	help
 	  ARM 64-bit (AArch64) Linux support.
 
+config HAVE_MOVE_PMD
+	bool
+	def_bool n
+
+config HAVE_MOVE_PUD
+	bool
+	def_bool n
+	
 config 64BIT
 	def_bool y
 
@@ -271,7 +301,7 @@ config ARCH_PROC_KCORE_TEXT
 source "init/Kconfig"
 
 
-# source "arch/arm64/Kconfig.platforms"
+source "arch/arm64/Kconfig.platforms"
 
 menu "Bus support"
 

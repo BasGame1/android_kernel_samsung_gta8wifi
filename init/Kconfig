@@ -1933,4 +1933,12 @@ config PSI
 	  Collects metrics on CPU, memory, and I/O pressure.
 	  Required by modern Android userspace for performance.
 	  
+config PMD_AND_PUD_FIX
+    bool
+    default y
+    depends on ARM64
+
+    select COMPACTION
+    select MIGRATION
+    
 source "kernel/Kconfig.locks"
